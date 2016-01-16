@@ -1,9 +1,27 @@
 
-# Created by https://www.gitignore.io/api/eclipse,windows,osx,linux
+# Created by https://www.gitignore.io/api/gradle,eclipse,intellij,windows,osx,linux
+
+### Gradle ###
+.gradle
+build/
+run/
+gradle.properties
+gradle.propertie
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
 
 ### Eclipse ###
 *.pydevproject
 .metadata
+.gradle
 bin/
 tmp/
 *.tmp
@@ -13,6 +31,7 @@ tmp/
 local.properties
 .settings/
 .loadpath
+eclipse/
 
 # Eclipse Core
 .project
@@ -45,6 +64,57 @@ local.properties
 .springBeans
 
 
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+
+*.iml
+
+## Directory-based project format:
+.idea/
+# if you remove the above rule, at least ignore the following:
+
+# User-specific stuff:
+# .idea/workspace.xml
+# .idea/tasks.xml
+# .idea/dictionaries
+# .idea/shelf
+
+# Sensitive or high-churn files:
+# .idea/dataSources.ids
+# .idea/dataSources.xml
+# .idea/sqlDataSources.xml
+# .idea/dynamic.xml
+# .idea/uiDesigner.xml
+
+# Gradle:
+# .idea/gradle.xml
+# .idea/libraries
+
+# Mongo Explorer plugin:
+# .idea/mongoSettings.xml
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+
 ### Windows ###
 # Windows image file caches
 Thumbs.db
@@ -64,6 +134,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Office file editing
+~$*
 
 
 ### OSX ###
@@ -96,9 +169,6 @@ Temporary Items
 
 ### Linux ###
 *~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
 
 # KDE directory preferences
 .directory
