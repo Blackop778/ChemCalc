@@ -37,8 +37,11 @@ public class Element
 		return atomicMass;
 	}
 
-	public byte getCharge()
+	public Byte getCharge()
 	{
-		return charge;
+		if(charge == 127)
+			return new Byte(null);
+		else
+			return charge;
 	}
 }
