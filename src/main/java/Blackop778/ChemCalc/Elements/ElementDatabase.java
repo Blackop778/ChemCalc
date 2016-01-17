@@ -26,6 +26,6 @@ public class ElementDatabase
 				"Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium",
 				"Rutherfordium", "Dubnium", "Seaborgium", "Hassium", "Metinerium", "Darmstadtium", "Roentgenium",
 				"Copericium", "Ununtrium", "Flerovium", "Ununpentium", "Livermorium", "Ununseptium", "Ununoctium"};
-		byte[] charges = {1, -1, 1};
+		byte[] charges = {1, -1, 1, 2, 3, 4, -3, -2, -1, 0, 1, 2, 3, 4, -3, -2, -1, 0, 1, 2, 3};
 	}
 }
