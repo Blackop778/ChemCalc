@@ -1,8 +1,11 @@
 package Blackop778.ChemCalc.Functions;
 
+import java.util.Scanner;
+
 public class IOManager
 {
-	private final boolean ECLIPSECONSOLEIO = true;
+	private static final boolean ECLIPSECONSOLEIO = true;
+	private static final Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args)
 	{
@@ -12,11 +15,44 @@ public class IOManager
 
 	static void output(String output)
 	{
-
+		if(ECLIPSECONSOLEIO)
+		{
+			System.out.println(output);
+		}
+		else
+		{
+			// TODO Add stand alone IO
+		}
+	}
+	
+	public static void output(InputReturn output)
+	{
+		if(ECLIPSECONSOLEIO)
+		{
+			System.out.println(output.getOutput());
+		}
+		else
+		{
+			// TODO Add stand alone IO
+		}
 	}
 
-	static String getInput()
+	static Scanner getInput()
 	{
-
+		if(ECLIPSECONSOLEIO)
+		{
+			return new Scanner(input.nextLine());
+		}
+		else
+		{
+			// TODO Add stand alone IO
+			return new Scanner("blah");
+		}
+	}
+	
+	public static Scanner getInput(String output)
+	{
+		output(output);
+		return getInput();
 	}
 }

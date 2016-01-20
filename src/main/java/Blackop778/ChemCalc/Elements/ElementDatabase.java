@@ -4,12 +4,14 @@ import java.util.HashMap;
 
 public class ElementDatabase
 {
-	public static Element[] atomicNumberArray = new Element[119];
-	public static HashMap<String, Element> atomicSymbolMap = new HashMap<String, Element>();
-	public static HashMap<String, Element> atomicNameMap = new HashMap<String, Element>();
+	private static boolean initialized = false;
+	private static Element[] atomicNumberArray = new Element[119];
+	private static HashMap<String, Element> atomicSymbolMap = new HashMap<String, Element>();
+	private static HashMap<String, Element> atomicNameMap = new HashMap<String, Element>();
 
-	static void populate()
+	static void initialize()
 	{
+		initialized = true;
 		String[] symbols = {"H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S",
 				"Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As",
 				"Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn",
@@ -45,16 +47,53 @@ public class ElementDatabase
 				190.23, 192.217, 195.084, 196.96, 200.59, 204.38, 207.2, 208.98, 209, 210, 222, 223, 226, 227, 232.0377,
 				231.03, 238.02, 237, 244, 243, 247, 247, 251, 252, 257, 258, 259, 262, 267, 268, 271, 272, 270, 276,
 				281, 280, 285, 284, 289, 288, 293, 294, 294};
+		//System.out.println(atomicMass.length);
 		// Fill element 0 in the array
 		atomicNumberArray[0] = new Element(0, "Error silly,", "Error", 778, (byte) 127);
 		// Fill the array and maps
 		Element storage;
 		for(int i = 1; i < atomicNumberArray.length; i++)
 		{
-			storage = new Element(i, names[i - 1], symbols[i - 1], atomicMass[i - 1], charges[i - 1]);
+			storage = new Element(i, 
+					names[i - 1], 
+					symbols[i - 1], 
+					atomicMass[i - 1], 
+					charges[i - 1]);
 			atomicNumberArray[i] = storage;
 			atomicSymbolMap.put(storage.getSymbol(), storage);
 			atomicNameMap.put(storage.getName(), storage);
 		}
+	}
+	
+	static boolean getInitialized()
+	{
+		return initialized;
+	}
+	
+	static Element atomicNumberGet(int number)
+	{
+		if(!initialized)
+		{
+			initialize();
+		}
+		return atomicNumberArray[number];
+	}
+	
+	public static Element atomicSymbolGet(String symbol)
+	{
+		if(!initialized)
+		{
+			initialize();
+		}
+		return atomicSymbolMap.get(symbol);
+	}
+	
+	static Element atomicNameGet(String name)
+	{
+		if(!initialized)
+		{
+			initialize();
+		}
+		return atomicNameMap.get(name);
 	}
 }

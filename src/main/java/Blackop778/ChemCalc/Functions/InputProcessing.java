@@ -6,12 +6,12 @@ import Blackop778.ChemCalc.Elements.ElementDatabase;
 
 public class InputProcessing
 {
-	static InputReturn ProcessInput(String Input)
+	public static InputReturn processInput(Scanner inputScanner)
 	{
-		Scanner input = new Scanner(Input);
+		Scanner input = inputScanner;
 		if(input.next().equals("mass"))
 			return new InputReturn("mass",
-					String.valueOf(ElementDatabase.atomicSymbolMap.get(input.next()).getAtomicMass()));
+					String.valueOf(ElementDatabase.atomicSymbolGet(input.next()).getAtomicMass()));
 		else
 			return new InputReturn("Error", "Not a valid argument");
 	}
