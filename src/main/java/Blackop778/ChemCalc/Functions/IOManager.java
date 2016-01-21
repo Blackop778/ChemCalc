@@ -17,19 +17,19 @@ public class IOManager
 	{
 		if(ECLIPSECONSOLEIO)
 		{
-			System.out.println(output);
+			System.out.print(output);
 		}
 		else
 		{
 			// TODO Add stand alone IO
 		}
 	}
-	
+
 	public static void output(InputReturn output)
 	{
 		if(ECLIPSECONSOLEIO)
 		{
-			System.out.println(output.getOutput());
+			System.out.print(output.getOutput());
 		}
 		else
 		{
@@ -49,7 +49,7 @@ public class IOManager
 			return new Scanner("blah");
 		}
 	}
-	
+
 	public static Scanner getInput(String output)
 	{
 		output(output);
