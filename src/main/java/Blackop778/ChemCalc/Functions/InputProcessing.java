@@ -7,10 +7,17 @@ import Blackop778.ChemCalc.Elements.ElementDatabase;
 
 public class InputProcessing
 {
+	/**
+	 * Processes what is input and returns it as an InputReturn
+	 * 
+	 * @param inputScanner
+	 *            The Scanner that contains what the user input
+	 * @return An InputReturn with the processed output
+	 */
 	public static InputReturn processInput(Scanner inputScanner)
 	{
 		Scanner input = inputScanner;
-		if (input.next().equals("mass"))
+		if(input.next().equals("mass"))
 		{
 			String next = input.next();
 			Element element;
@@ -18,9 +25,9 @@ public class InputProcessing
 			{
 				element = ElementDatabase.atomicNumberGet(Integer.valueOf(next));
 			}
-			catch (NumberFormatException e)
+			catch(NumberFormatException e)
 			{
-				if (next.length() < 4 && !next.equalsIgnoreCase("Tin"))
+				if(next.length() < 4 && !next.equalsIgnoreCase("Tin"))
 				{
 					element = ElementDatabase.atomicSymbolGet(next);
 				}

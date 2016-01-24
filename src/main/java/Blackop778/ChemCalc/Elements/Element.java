@@ -4,39 +4,73 @@ public class Element
 {
 	private int atomicNumber;
 	private String name;
-	private String symbol;
+	private String atomicSymbol;
 	private double atomicMass;
 	private byte charge;
 
-	public Element(int atomicNumber, String name, String symbol, double atomicMass, byte charge)
+	/**
+	 * Creates a new Element and stores it's data
+	 * 
+	 * @param atomicNumber
+	 *            The Element's atomic number
+	 * @param name
+	 *            The Element's name
+	 * @param atomicSymbol
+	 *            The Element's atomic symbol
+	 * @param atomicMass
+	 *            The Element's atomic mass
+	 * @param charge
+	 *            The Element's charge, where 127 represents it has no charge
+	 */
+	public Element(int atomicNumber, String name, String atomicSymbol, double atomicMass, byte charge)
 	{
 		this.atomicNumber = atomicNumber;
 		this.name = name;
-		this.symbol = symbol;
+		this.atomicSymbol = atomicSymbol;
 		this.atomicMass = atomicMass;
 		this.charge = charge;
 	}
 
+	/**
+	 * 
+	 * @return The Element's atomic number
+	 */
 	public int getAtomicNumber()
 	{
 		return atomicNumber;
 	}
 
+	/**
+	 * 
+	 * @return The Element's name
+	 */
 	public String getName()
 	{
 		return name;
 	}
 
-	public String getSymbol()
+	/**
+	 * 
+	 * @return The Element's atomic symbol
+	 */
+	public String getAtomicSymbol()
 	{
-		return symbol;
+		return atomicSymbol;
 	}
 
+	/**
+	 * 
+	 * @return The Element's atomic mass
+	 */
 	public double getAtomicMass()
 	{
 		return atomicMass;
 	}
 
+	/**
+	 * 
+	 * @return The Element's charge, or null if it is unknown
+	 */
 	public Byte getCharge()
 	{
 		if(charge == 127)

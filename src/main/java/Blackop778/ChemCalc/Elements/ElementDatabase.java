@@ -9,6 +9,9 @@ public class ElementDatabase
 	private static HashMap<String, Element> atomicSymbolMap = new HashMap<String, Element>();
 	private static HashMap<String, Element> atomicNameMap = new HashMap<String, Element>();
 
+	/**
+	 * Fills the various maps and array with Elements
+	 */
 	static void initialize()
 	{
 		initialized = true;
@@ -57,16 +60,27 @@ public class ElementDatabase
 		{
 			storage = new Element(i, names[i - 1], symbols[i - 1], atomicMass[i - 1], charges[i - 1]);
 			atomicNumberArray[i] = storage;
-			atomicSymbolMap.put(storage.getSymbol(), storage);
+			atomicSymbolMap.put(storage.getAtomicSymbol(), storage);
 			atomicNameMap.put(storage.getName(), storage);
 		}
 	}
 
+	/**
+	 * 
+	 * @return Whether or not the database has been filled
+	 */
 	public static boolean getInitialized()
 	{
 		return initialized;
 	}
 
+	/**
+	 * Will initialize the data base if it hasn't been
+	 * 
+	 * @param number
+	 *            The atomic number of the Element that will be returned
+	 * @return The Element with a atomic number of 'number'
+	 */
 	public static Element atomicNumberGet(int number)
 	{
 		if(!initialized)
@@ -76,6 +90,14 @@ public class ElementDatabase
 		return atomicNumberArray[number];
 	}
 
+	/**
+	 * Will initialize the data base if it hasn't been. Ignores the case of the
+	 * input
+	 * 
+	 * @param symbol
+	 *            The atomic symbol of the Element that will be returned
+	 * @return A Element with the atomic symbol 'symbol'
+	 */
 	public static Element atomicSymbolGet(String symbol)
 	{
 		if(!initialized)
@@ -91,6 +113,14 @@ public class ElementDatabase
 		return atomicSymbolMap.get(symbolF);
 	}
 
+	/**
+	 * Will initialize the data base if it hasn't been. Ignores the case of the
+	 * input
+	 * 
+	 * @param name
+	 *            The name of the Element that will be returned
+	 * @return A Element with the name 'name'
+	 */
 	public static Element atomicNameGet(String name)
 	{
 		if(!initialized)
