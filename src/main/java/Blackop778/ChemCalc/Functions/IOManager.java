@@ -26,6 +26,24 @@ public class IOManager
 	}
 
 	/**
+	 * Gets a string that will be output in a new line to the user
+	 * 
+	 * @param output
+	 *            The string that will be output
+	 */
+	static void outputln(String output)
+	{
+		if(ECLIPSECONSOLEIO)
+		{
+			System.out.println(output);
+		}
+		else
+		{
+			// TODO Add stand alone IO
+		}
+	}
+
+	/**
 	 * Outputs the output of the InputReturn passed to it
 	 * 
 	 * @param output
@@ -44,11 +62,29 @@ public class IOManager
 	}
 
 	/**
+	 * Outputs the output of the InputReturn passed to it on a new line
+	 * 
+	 * @param output
+	 *            The InputReturn that's output will be output
+	 */
+	public static void outputln(InputReturn output)
+	{
+		if(ECLIPSECONSOLEIO)
+		{
+			System.out.println(output.getOutput());
+		}
+		else
+		{
+			// TODO Add stand alone IO
+		}
+	}
+
+	/**
 	 * Gets the user's input and returns it
 	 * 
 	 * @return A Scanner that contains what the user input
 	 */
-	static Scanner getInput()
+	public static Scanner getInput()
 	{
 		if(ECLIPSECONSOLEIO)
 			return new Scanner(input.nextLine());
@@ -66,7 +102,13 @@ public class IOManager
 	 */
 	public static Scanner getInput(String output)
 	{
-		output(output);
-		return getInput();
+		if(ECLIPSECONSOLEIO)
+		{
+			output(output);
+			return getInput();
+		}
+		else
+			// TODO Add stand alone IO
+			return new Scanner("blah");
 	}
 }

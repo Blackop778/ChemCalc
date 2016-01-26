@@ -17,7 +17,7 @@ public class InputProcessing
 	public static InputReturn processInput(Scanner inputScanner)
 	{
 		Scanner input = inputScanner;
-		if(input.next().equals("mass"))
+		if(input.next().equalsIgnoreCase("mass"))
 		{
 			String next = input.next();
 			Element element;
@@ -42,7 +42,11 @@ public class InputProcessing
 			InputReturn inputreturn = new InputReturn("mass", Mass);
 			return inputreturn;
 		}
+		else if(input.next().equalsIgnoreCase("help"))
+		{
+			return new InputReturn("blah", "blah");
+		}
 		else
-			return new InputReturn("Error", "Not a valid argument");
+			return new InputReturn("Error", "Not a valid argument. Enter 'help' for valid commands");
 	}
 }
