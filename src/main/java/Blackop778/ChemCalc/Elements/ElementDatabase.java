@@ -52,13 +52,11 @@ public class ElementDatabase
 				226, 227, 232.0377, 231.03, 238.02, 237, 244, 243, 247, 247, 251, 252, 257, 258, 259, 262, 267, 268,
 				271, 272, 270, 276, 281, 280, 285, 284, 289, 288, 293, 294, 294};
 
-		// Fill element 0 in the array
-		atomicNumberArray[0] = new Element(0, "Error silly,", "Error", 778, (byte) 127);
 		// Fill the array and maps
 		Element storage;
-		for(int i = 1; i < atomicNumberArray.length; i++)
+		for(int i = 0; i < atomicNumberArray.length; i++)
 		{
-			storage = new Element(i, names[i - 1], symbols[i - 1], atomicMass[i - 1], charges[i - 1]);
+			storage = new Element(i, names[i], symbols[i], atomicMass[i], charges[i]);
 			atomicNumberArray[i] = storage;
 			atomicSymbolMap.put(storage.getAtomicSymbol(), storage);
 			atomicNameMap.put(storage.getName(), storage);
@@ -75,10 +73,11 @@ public class ElementDatabase
 	}
 
 	/**
-	 * Will initialize the data base if it hasn't been
+	 * Will initialize the data base if it hasn't been.
 	 * 
 	 * @param number
-	 *            The atomic number of the Element that will be returned
+	 *            The atomic number of the Element that will be returned. 1 is
+	 *            subtracted from this since arrays start at 0.
 	 * @return The Element with a atomic number of 'number'
 	 */
 	public static Element atomicNumberGet(int number)
@@ -87,7 +86,7 @@ public class ElementDatabase
 		{
 			initialize();
 		}
-		return atomicNumberArray[number];
+		return atomicNumberArray[number - 1];
 	}
 
 	/**
