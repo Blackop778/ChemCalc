@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Blackop778.ChemCalc.Elements.Element;
 import Blackop778.ChemCalc.Elements.ElementDatabase;
+import Blackop778.ChemCalc.Elements.NoElementException;
 
 public class InputProcessing
 {
@@ -47,32 +48,41 @@ public class InputProcessing
 		}
 		catch(NumberFormatException e)
 		{
-			if(next.length() < 4 && !next.equalsIgnoreCase("Tin"))
+			try
 			{
-				element = ElementDatabase.atomicSymbolGet(next);
+				if(next.length() < 4 && !next.equalsIgnoreCase("Tin"))
+				{
+					element = ElementDatabase.atomicSymbolGet(next);
+				}
+				else
+				{
+					element = ElementDatabase.atomicNameGet(next);
+				}
 			}
-			else
+			catch(NoElementException e1)
 			{
-				element = ElementDatabase.atomicNameGet(next);
+				IOManager.output(e1.getLocalizedMessage());
 			}
 		}
 
-		// Make sure the element was found then return the element's mass
-		if(element != null)
-		{
-			double mass = element.getAtomicMass();
-			String Mass = String.valueOf(mass);
-			InputReturn inputreturn = new InputReturn("mass", Mass);
-			return inputreturn;
-		}
-		else
-		{
-			return new InputReturn("Error", "Error, could not find an element with your atomic symbol/name/number.");
-		}
+		double mass = element.getAtomicMass();
+		String Mass = String.valueOf(mass);
+		InputReturn inputreturn = new InputReturn("mass", Mass);
+		return inputreturn;
 	}
 
 	public static InputReturn getMole(Scanner input)
 	{
-
+		String[] inputArray = Libs.scannerToArray(input);
+		if(inputArray.length == 2)
+		{
+			String element = inputArray[0];
+			double inputMass = Double.valueOf(inputArray[1]);
+		}
+		else
+		{
+			return new InputReturn("blah", "no polyatomics");
+			// TODO Add polyatomic support
+		}
 	}
 }
