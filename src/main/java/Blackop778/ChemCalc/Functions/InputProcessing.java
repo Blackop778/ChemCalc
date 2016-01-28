@@ -22,6 +22,10 @@ public class InputProcessing
 		{
 			return getMass(input);
 		}
+		else if(command.equalsIgnoreCase("mole"))
+		{
+			return getMole(input);
+		}
 		else if(command.equalsIgnoreCase("help"))
 		{
 			return new InputReturn("help", "Commands:"
@@ -31,9 +35,9 @@ public class InputProcessing
 			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
 	}
 
-	public static InputReturn getMass(Scanner inputScanner)
+	public static InputReturn getMass(Scanner input)
 	{
-		String next = inputScanner.next();
+		String next = input.next();
 		Element element;
 
 		// Get the element from the database
@@ -65,5 +69,10 @@ public class InputProcessing
 		{
 			return new InputReturn("Error", "Error, could not find an element with your atomic symbol/name/number.");
 		}
+	}
+
+	public static InputReturn getMole(Scanner input)
+	{
+
 	}
 }
