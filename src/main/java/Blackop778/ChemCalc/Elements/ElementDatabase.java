@@ -114,13 +114,15 @@ public class ElementDatabase
 
 	/**
 	 * Will initialize the data base if it hasn't been. Ignores the case of the
-	 * input
+	 * input.
 	 * 
 	 * @param name
 	 *            The name of the Element that will be returned
 	 * @return A Element with the name 'name'
+	 * @throws NoElementException
+	 *             An error stating the element requested could not be found
 	 */
-	public static Element atomicNameGet(String name)
+	public static Element atomicNameGet(String name) throws NoElementException
 	{
 		if(!initialized)
 		{
@@ -132,6 +134,40 @@ public class ElementDatabase
 		String name2 = name.substring(1, name.length());
 		name2 = name2.toLowerCase();
 		String nameF = name1 + name2;
-		return atomicNameMap.get(nameF);
+
+		Element toReturn = atomicNameMap.get(nameF);
+		if(toReturn != null)
+			return toReturn;
+		else
+			throw new NoElementException("An element with a name of '" + name + "' could not be found.");
+	}
+
+	public static double massUnknownInputGet(String input) throws NoElementException
+	{
+		Element element;
+		try
+		{
+			element = ElementDatabase.atomicNumberGet(Integer.valueOf(input));
+		}
+		catch(NumberFormatException e)
+		{
+			if(input.length() < 4 && !input.equalsIgnoreCase("Tin"))
+			{
+				element = ElementDatabase.atomicSymbolGet(input);
+			}
+			else
+			{
+				element = ElementDatabase.atomicNameGet(input);
+			}
+		}
+
+		if(element != null)
+		{
+			return element.getAtomicMass();
+		}
+		else
+		{
+			throw new NoElementException("An element with a name/symbol/number of '" + input + "' could not be found.");
+		}
 	}
 }
