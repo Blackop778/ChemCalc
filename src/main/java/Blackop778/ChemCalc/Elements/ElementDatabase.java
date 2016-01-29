@@ -79,14 +79,19 @@ public class ElementDatabase
 	 *            The atomic number of the Element that will be returned. 1 is
 	 *            subtracted from this since arrays start at 0.
 	 * @return The Element with a atomic number of 'number'
+	 * @throws NoElementException
 	 */
-	public static Element atomicNumberGet(int number)
+	public static Element atomicNumberGet(int number) throws NoElementException
 	{
 		if(!initialized)
 		{
 			initialize();
 		}
-		return atomicNumberArray[number - 1];
+		Element toReturn = atomicNumberArray[number - 1];
+		if(toReturn != null)
+			return toReturn;
+		else
+			throw new NoElementException("An element with a number of '" + number + "' could not be found.");
 	}
 
 	/**
@@ -96,8 +101,9 @@ public class ElementDatabase
 	 * @param symbol
 	 *            The atomic symbol of the Element that will be returned
 	 * @return A Element with the atomic symbol 'symbol'
+	 * @throws NoElementException
 	 */
-	public static Element atomicSymbolGet(String symbol)
+	public static Element atomicSymbolGet(String symbol) throws NoElementException
 	{
 		if(!initialized)
 		{
@@ -109,7 +115,12 @@ public class ElementDatabase
 		String symbol2 = symbol.substring(1, symbol.length());
 		symbol2 = symbol2.toLowerCase();
 		String symbolF = symbol1 + symbol2;
-		return atomicSymbolMap.get(symbolF);
+
+		Element toReturn = atomicSymbolMap.get(symbolF);
+		if(toReturn != null)
+			return toReturn;
+		else
+			throw new NoElementException("An element with a symbol of '" + symbol + "' could not be found.");
 	}
 
 	/**

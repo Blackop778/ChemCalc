@@ -14,8 +14,9 @@ public class InputProcessing
 	 * @param inputScanner
 	 *            The Scanner that contains what the user input
 	 * @return An InputReturn with the processed output
+	 * @throws NoElementException
 	 */
-	public static InputReturn processInput(Scanner inputScanner)
+	public static InputReturn processInput(Scanner inputScanner) throws NoElementException
 	{
 		Scanner input = inputScanner;
 		String command = input.next();
@@ -36,7 +37,7 @@ public class InputProcessing
 			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
 	}
 
-	public static InputReturn getMass(Scanner input)
+	public static InputReturn getMass(Scanner input) throws NoElementException
 	{
 		String next = input.next();
 		Element element;
@@ -48,20 +49,13 @@ public class InputProcessing
 		}
 		catch(NumberFormatException e)
 		{
-			try
+			if(next.length() < 4 && !next.equalsIgnoreCase("Tin"))
 			{
-				if(next.length() < 4 && !next.equalsIgnoreCase("Tin"))
-				{
-					element = ElementDatabase.atomicSymbolGet(next);
-				}
-				else
-				{
-					element = ElementDatabase.atomicNameGet(next);
-				}
+				element = ElementDatabase.atomicSymbolGet(next);
 			}
-			catch(NoElementException e1)
+			else
 			{
-				IOManager.output(e1.getLocalizedMessage());
+				element = ElementDatabase.atomicNameGet(next);
 			}
 		}
 
@@ -71,17 +65,19 @@ public class InputProcessing
 		return inputreturn;
 	}
 
-	public static InputReturn getMole(Scanner input)
+	public static InputReturn getMole(Scanner input) throws NoElementException
 	{
 		String[] inputArray = Libs.scannerToArray(input);
-		if(inputArray.length == 2)
+		if(inputArray.length == 1)
 		{
-			String element = inputArray[0];
+			double elementMass = ElementDatabase.massUnknownInputGet(inputArray[0]);
 			double inputMass = Double.valueOf(inputArray[1]);
+			double moles = inputMass / elementMass;
+			return new InputReturn("moles", String.valueOf(moles));
 		}
 		else
 		{
-			return new InputReturn("blah", "no polyatomics");
+			return new InputReturn("blah", String.valueOf(inputArray.length));
 			// TODO Add polyatomic support
 		}
 	}
