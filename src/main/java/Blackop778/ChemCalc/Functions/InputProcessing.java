@@ -21,18 +21,14 @@ public class InputProcessing
 		Scanner input = inputScanner;
 		String command = input.next();
 		if(command.equalsIgnoreCase("mass"))
-		{
 			return getMass(input);
-		}
 		else if(command.equalsIgnoreCase("mole"))
-		{
 			return getMole(input);
-		}
 		else if(command.equalsIgnoreCase("help"))
-		{
 			return new InputReturn("help", "Commands:"
-					+ "\nmass  -  [atomic symbol, name, or number] returns the mass of the element. Will eventually allow polyatomics.");
-		}
+					+ "\nNOTE: arg stands for argument, or words typed after the initial command which modify the command."
+					+ "\nmass  -  [atomic symbol, name, or number] returns the mass of arg 1. Will eventually allow polyatomics."
+					+ "\nmole  -  [atomic symbol, name, or number] [atomic mass] returns how many moles of arg 1 you have with a mass of arg 2.");
 		else
 			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
 	}
@@ -68,7 +64,7 @@ public class InputProcessing
 	public static InputReturn getMole(Scanner input) throws NoElementException
 	{
 		String[] inputArray = Libs.scannerToArray(input);
-		if(inputArray.length == 1)
+		if(inputArray.length == 2)
 		{
 			double elementMass = ElementDatabase.massUnknownInputGet(inputArray[0]);
 			double inputMass = Double.valueOf(inputArray[1]);
@@ -76,9 +72,7 @@ public class InputProcessing
 			return new InputReturn("moles", String.valueOf(moles));
 		}
 		else
-		{
 			return new InputReturn("blah", String.valueOf(inputArray.length));
-			// TODO Add polyatomic support
-		}
+		// TODO Add polyatomic support
 	}
 }

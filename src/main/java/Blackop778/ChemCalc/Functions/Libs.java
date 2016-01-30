@@ -1,5 +1,6 @@
 package Blackop778.ChemCalc.Functions;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Libs
@@ -32,15 +33,16 @@ public class Libs
 	 */
 	static String[] scannerToArray(Scanner scanner)
 	{
-		String[] output = new String[scannerLength(scanner) - 1];
+		ArrayList<String> intermediateStorage = new ArrayList<String>();
 
-		int i = 0;
 		while(scanner.hasNext())
 		{
-			output[i] = scanner.next();
-			i++;
+			intermediateStorage.add(scanner.next());
 		}
 
-		return output;
+		intermediateStorage.trimToSize();
+		String[] toReturn = new String[intermediateStorage.toArray().length];
+		intermediateStorage.toArray(toReturn);
+		return toReturn;
 	}
 }

@@ -54,7 +54,7 @@ public class ElementDatabase
 
 		// Fill the array and maps
 		Element storage;
-		for(int i = 0; i < atomicNumberArray.length; i++)
+		for(int i = 0; i < atomicNumberArray.length - 1; i++)
 		{
 			storage = new Element(i, names[i], symbols[i], atomicMass[i], charges[i]);
 			atomicNumberArray[i] = storage;
@@ -173,12 +173,8 @@ public class ElementDatabase
 		}
 
 		if(element != null)
-		{
 			return element.getAtomicMass();
-		}
 		else
-		{
 			throw new NoElementException("An element with a name/symbol/number of '" + input + "' could not be found.");
-		}
 	}
 }

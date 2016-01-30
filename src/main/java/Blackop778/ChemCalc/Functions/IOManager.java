@@ -87,7 +87,10 @@ public class IOManager
 	public static Scanner getInput()
 	{
 		if(ECLIPSECONSOLEIO)
-			return new Scanner(input.nextLine());
+		{
+			Scanner test = new Scanner(input.nextLine());
+			return test;
+		}
 		else
 			// TODO Add stand alone IO
 			return new Scanner("blah");
