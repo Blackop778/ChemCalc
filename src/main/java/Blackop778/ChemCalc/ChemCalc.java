@@ -15,9 +15,13 @@ public class ChemCalc
 		doIt();
 	}
 
+	/**
+	 * Does the thing. Runs the program.
+	 */
 	public static void doIt()
 	{
-		Scanner input = IOManager.getInput("Please enter a command: ");
+		Scanner input = IOManager.getInput("Please enter a command(ex. 'help': ");
+
 		InputReturn output;
 		try
 		{
@@ -27,13 +31,19 @@ public class ChemCalc
 		{
 			output = new InputReturn("NoElementException", e.getLocalizedMessage());
 		}
-		IOManager.outputln(output);
+
+		IOManager.finalOutput(output);
+
 		doItAgain();
 	}
 
+	/**
+	 * Asks the user if they want to do the thing again.
+	 */
 	public static void doItAgain()
 	{
 		Scanner input = IOManager.getInput("Run again?(Y/N) ");
+
 		if(input.next().equalsIgnoreCase("Y"))
 		{
 			doIt();

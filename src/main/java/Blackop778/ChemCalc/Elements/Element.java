@@ -22,7 +22,7 @@ public class Element
 	 * @param charge
 	 *            The Element's charge, where 127 represents it has no charge
 	 */
-	public Element(int atomicNumber, String name, String atomicSymbol, double atomicMass, byte charge)
+	protected Element(int atomicNumber, String name, String atomicSymbol, double atomicMass, byte charge)
 	{
 		this.atomicNumber = atomicNumber;
 		this.name = name;

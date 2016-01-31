@@ -2,7 +2,6 @@ package Blackop778.ChemCalc.Functions;
 
 import java.util.Scanner;
 
-import Blackop778.ChemCalc.Elements.Element;
 import Blackop778.ChemCalc.Elements.ElementDatabase;
 import Blackop778.ChemCalc.Elements.NoElementException;
 
@@ -35,29 +34,12 @@ public class InputProcessing
 
 	public static InputReturn getMass(Scanner input) throws NoElementException
 	{
+		String[] inputStorage = Libs.scannerToArray(input);
 		String next = input.next();
-		Element element;
 
-		// Get the element from the database
-		try
-		{
-			element = ElementDatabase.atomicNumberGet(Integer.valueOf(next));
-		}
-		catch(NumberFormatException e)
-		{
-			if(next.length() < 4 && !next.equalsIgnoreCase("Tin"))
-			{
-				element = ElementDatabase.atomicSymbolGet(next);
-			}
-			else
-			{
-				element = ElementDatabase.atomicNameGet(next);
-			}
-		}
+		InputReturn temp = ElementDatabase.massUnknownInputGet(next);
 
-		double mass = element.getAtomicMass();
-		String Mass = String.valueOf(mass);
-		InputReturn inputreturn = new InputReturn("mass", Mass);
+		InputReturn inputreturn = new InputReturn("mass", temp.getOutput(), inputStorage, temp.getInputType());
 		return inputreturn;
 	}
 
@@ -66,13 +48,16 @@ public class InputProcessing
 		String[] inputArray = Libs.scannerToArray(input);
 		if(inputArray.length == 2)
 		{
-			double elementMass = ElementDatabase.massUnknownInputGet(inputArray[0]);
+			InputReturn temp = ElementDatabase.massUnknownInputGet(inputArray[0]);
+			double elementMass = Double.valueOf(temp.getOutput());
 			double inputMass = Double.valueOf(inputArray[1]);
 			double moles = inputMass / elementMass;
-			return new InputReturn("moles", String.valueOf(moles));
+			return new InputReturn("moles", String.valueOf(moles), inputArray, temp.getInputType());
 		}
+		else if(inputArray.length == 1)
+			return new InputReturn("error", "Additional arguments expected.");
 		else
-			return new InputReturn("blah", String.valueOf(inputArray.length));
+			return new InputReturn("blah", "Polyatomics not currently supported.");
 		// TODO Add polyatomic support
 	}
 }

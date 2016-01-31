@@ -2,6 +2,8 @@ package Blackop778.ChemCalc.Elements;
 
 import java.util.HashMap;
 
+import Blackop778.ChemCalc.Functions.InputReturn;
+
 public class ElementDatabase
 {
 	private static boolean initialized = false;
@@ -153,27 +155,31 @@ public class ElementDatabase
 			throw new NoElementException("An element with a name of '" + name + "' could not be found.");
 	}
 
-	public static double massUnknownInputGet(String input) throws NoElementException
+	public static InputReturn massUnknownInputGet(String input) throws NoElementException
 	{
 		Element element;
+		String inputType;
 		try
 		{
 			element = ElementDatabase.atomicNumberGet(Integer.valueOf(input));
+			inputType = "number";
 		}
 		catch(NumberFormatException e)
 		{
 			if(input.length() < 4 && !input.equalsIgnoreCase("Tin"))
 			{
 				element = ElementDatabase.atomicSymbolGet(input);
+				inputType = "symbol";
 			}
 			else
 			{
 				element = ElementDatabase.atomicNameGet(input);
+				inputType = "name";
 			}
 		}
 
 		if(element != null)
-			return element.getAtomicMass();
+			return new InputReturn("mass", String.valueOf(element.getAtomicMass()), inputType);
 		else
 			throw new NoElementException("An element with a name/symbol/number of '" + input + "' could not be found.");
 	}

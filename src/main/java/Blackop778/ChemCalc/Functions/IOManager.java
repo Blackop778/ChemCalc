@@ -44,6 +44,57 @@ public class IOManager
 	}
 
 	/**
+	 * Allows for the final output to be more sophisticated and include text.
+	 * 
+	 * @param input
+	 *            Contains the information to be output
+	 */
+	public static void finalOutput(InputReturn input)
+	{
+		String output;
+
+		if(input.getReturnType().equals("mass"))
+		{
+			if(input.getInputType().equals("symbol") || input.getInputType().equals("name"))
+			{
+				output = "The mass of " + input.getInputs()[0] + " is " + input.getOutput() + ".";
+			}
+			else if(input.getInputType().equals("number"))
+			{
+				output = "The mass of the element with an atomic number of " + input.getInputs()[0] + " is "
+						+ input.getOutput() + ".";
+			}
+			else
+			{
+				output = input.getOutput();
+			}
+		}
+		else if(input.getReturnType().equals("mole"))
+		{
+			if(input.getInputType().equals("symbol") || input.getInputType().equals("name"))
+			{
+				output = input.getInputs()[1] + "g of the element with an atomic number of " + input.getInputs()[0]
+						+ " is equalivalent to " + input.getOutput() + " moles.";
+			}
+			else if(input.getInputType().equals("number"))
+			{
+				output = input.getInputs()[1] + "g of " + input.getInputs()[0] + " is equalivalent to "
+						+ input.getOutput() + " moles.";
+			}
+			else
+			{
+				output = input.getOutput();
+			}
+		}
+		else
+		{
+			output = input.getOutput();
+		}
+
+		outputln(output);
+	}
+
+	/**
 	 * Outputs the output of the InputReturn passed to it
 	 * 
 	 * @param output
