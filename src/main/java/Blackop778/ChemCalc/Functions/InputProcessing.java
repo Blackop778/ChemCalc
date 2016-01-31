@@ -35,9 +35,8 @@ public class InputProcessing
 	public static InputReturn getMass(Scanner input) throws NoElementException
 	{
 		String[] inputStorage = Libs.scannerToArray(input);
-		String next = input.next();
 
-		InputReturn temp = ElementDatabase.massUnknownInputGet(next);
+		InputReturn temp = ElementDatabase.massUnknownInputGet(inputStorage[0]);
 
 		InputReturn inputreturn = new InputReturn("mass", temp.getOutput(), inputStorage, temp.getInputType());
 		return inputreturn;
@@ -52,7 +51,7 @@ public class InputProcessing
 			double elementMass = Double.valueOf(temp.getOutput());
 			double inputMass = Double.valueOf(inputArray[1]);
 			double moles = inputMass / elementMass;
-			return new InputReturn("moles", String.valueOf(moles), inputArray, temp.getInputType());
+			return new InputReturn("mole", String.valueOf(moles), inputArray, temp.getInputType());
 		}
 		else if(inputArray.length == 1)
 			return new InputReturn("error", "Additional arguments expected.");

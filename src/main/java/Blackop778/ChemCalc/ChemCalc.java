@@ -20,7 +20,7 @@ public class ChemCalc
 	 */
 	public static void doIt()
 	{
-		Scanner input = IOManager.getInput("Please enter a command(ex. 'help': ");
+		Scanner input = IOManager.getInput("Please enter a command(ex. 'help'): ");
 
 		InputReturn output;
 		try

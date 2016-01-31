@@ -57,12 +57,12 @@ public class IOManager
 		{
 			if(input.getInputType().equals("symbol") || input.getInputType().equals("name"))
 			{
-				output = "The mass of " + input.getInputs()[0] + " is " + input.getOutput() + ".";
+				output = "The mass of " + input.getInputs()[0] + " is " + input.getOutput() + "g.";
 			}
 			else if(input.getInputType().equals("number"))
 			{
 				output = "The mass of the element with an atomic number of " + input.getInputs()[0] + " is "
-						+ input.getOutput() + ".";
+						+ input.getOutput() + "g.";
 			}
 			else
 			{
@@ -73,13 +73,13 @@ public class IOManager
 		{
 			if(input.getInputType().equals("symbol") || input.getInputType().equals("name"))
 			{
-				output = input.getInputs()[1] + "g of the element with an atomic number of " + input.getInputs()[0]
-						+ " is equalivalent to " + input.getOutput() + " moles.";
+				output = input.getInputs()[1] + "g of " + input.getInputs()[0] + " is equalivalent to "
+						+ input.getOutput() + " moles.";
 			}
 			else if(input.getInputType().equals("number"))
 			{
-				output = input.getInputs()[1] + "g of " + input.getInputs()[0] + " is equalivalent to "
-						+ input.getOutput() + " moles.";
+				output = input.getInputs()[1] + "g of the element with an atomic number of " + input.getInputs()[0]
+						+ " is equalivalent to " + input.getOutput() + " moles.";
 			}
 			else
 			{
