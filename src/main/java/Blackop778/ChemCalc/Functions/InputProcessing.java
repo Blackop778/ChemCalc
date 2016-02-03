@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Blackop778.ChemCalc.Elements.ElementDatabase;
 import Blackop778.ChemCalc.Elements.NoElementException;
 
-public class InputProcessing
+public abstract class InputProcessing
 {
 	/**
 	 * Processes what is input and returns it as an InputReturn

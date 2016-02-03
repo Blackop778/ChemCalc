@@ -3,7 +3,7 @@ package Blackop778.ChemCalc.Functions;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Libs
+public abstract class Libs
 {
 	/**
 	 * Gets the number of times input() can be ran before running out of

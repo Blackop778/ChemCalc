@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import Blackop778.ChemCalc.Functions.InputReturn;
 
-public class ElementDatabase
+public abstract class ElementDatabase
 {
 	private static boolean initialized = false;
 	private static Element[] atomicNumberArray = new Element[119];

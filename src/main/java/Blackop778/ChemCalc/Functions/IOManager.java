@@ -2,7 +2,7 @@ package Blackop778.ChemCalc.Functions;
 
 import java.util.Scanner;
 
-public class IOManager
+public abstract class IOManager
 {
 	private static final boolean ECLIPSECONSOLEIO = true;
 	private static final Scanner input = new Scanner(System.in);

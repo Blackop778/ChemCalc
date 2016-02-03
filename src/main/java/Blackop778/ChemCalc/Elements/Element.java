@@ -2,11 +2,11 @@ package Blackop778.ChemCalc.Elements;
 
 public class Element
 {
-	private int atomicNumber;
-	private String name;
-	private String atomicSymbol;
-	private double atomicMass;
-	private byte charge;
+	private final int atomicNumber;
+	private final String name;
+	private final String atomicSymbol;
+	private final double atomicMass;
+	private final byte charge;
 
 	/**
 	 * Creates a new Element and stores it's data
