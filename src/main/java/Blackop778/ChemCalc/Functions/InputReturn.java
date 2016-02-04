@@ -1,11 +1,11 @@
 package Blackop778.ChemCalc.Functions;
 
-public class InputReturn
+public final class InputReturn
 {
-	private String returnType;
-	private String output;
-	private String[] inputs;
-	private String inputType;
+	private final String returnType;
+	private final String output;
+	private final String[] inputs;
+	private final String inputType;
 
 	private static final String[] NULLSTRINGS = {null};
 

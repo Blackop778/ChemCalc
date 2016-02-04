@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class IOManager
 {
-	private static final boolean ECLIPSECONSOLEIO = true;
+
 	private static final Scanner input = new Scanner(System.in);
 
 	/**
@@ -13,16 +13,9 @@ public abstract class IOManager
 	 * @param output
 	 *            The string that will be output
 	 */
-	static void output(String output)
+	public static void output(String output)
 	{
-		if(ECLIPSECONSOLEIO)
-		{
-			System.out.print(output);
-		}
-		else
-		{
-			// TODO Add stand alone IO
-		}
+		System.out.print(output);
 	}
 
 	/**
@@ -31,16 +24,9 @@ public abstract class IOManager
 	 * @param output
 	 *            The string that will be output
 	 */
-	static void outputln(String output)
+	public static void outputln(String output)
 	{
-		if(ECLIPSECONSOLEIO)
-		{
-			System.out.println(output);
-		}
-		else
-		{
-			// TODO Add stand alone IO
-		}
+		System.out.println(output);
 	}
 
 	/**
@@ -102,14 +88,7 @@ public abstract class IOManager
 	 */
 	public static void output(InputReturn output)
 	{
-		if(ECLIPSECONSOLEIO)
-		{
-			System.out.print(output.getOutput());
-		}
-		else
-		{
-			// TODO Add stand alone IO
-		}
+		System.out.print(output.getOutput());
 	}
 
 	/**
@@ -120,14 +99,7 @@ public abstract class IOManager
 	 */
 	public static void outputln(InputReturn output)
 	{
-		if(ECLIPSECONSOLEIO)
-		{
-			System.out.println(output.getOutput());
-		}
-		else
-		{
-			// TODO Add stand alone IO
-		}
+		System.out.println(output.getOutput());
 	}
 
 	/**
@@ -137,14 +109,8 @@ public abstract class IOManager
 	 */
 	public static Scanner getInput()
 	{
-		if(ECLIPSECONSOLEIO)
-		{
-			Scanner test = new Scanner(input.nextLine());
-			return test;
-		}
-		else
-			// TODO Add stand alone IO
-			return new Scanner("blah");
+		Scanner toPass = new Scanner(input.nextLine());
+		return toPass;
 	}
 
 	/**
@@ -156,13 +122,7 @@ public abstract class IOManager
 	 */
 	public static Scanner getInput(String output)
 	{
-		if(ECLIPSECONSOLEIO)
-		{
-			output(output);
-			return getInput();
-		}
-		else
-			// TODO Add stand alone IO
-			return new Scanner("blah");
+		output(output);
+		return getInput();
 	}
 }

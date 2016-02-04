@@ -178,9 +178,6 @@ public abstract class ElementDatabase
 			}
 		}
 
-		if(element != null)
-			return new InputReturn("mass", String.valueOf(element.getAtomicMass()), inputType);
-		else
-			throw new NoElementException("An element with a name/symbol/number of '" + input + "' could not be found.");
+		return new InputReturn("mass", String.valueOf(element.getAtomicMass()), inputType);
 	}
 }

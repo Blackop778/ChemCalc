@@ -1,6 +1,6 @@
 package Blackop778.ChemCalc.Elements;
 
-public class Element
+public final class Element
 {
 	private final int atomicNumber;
 	private final String name;
