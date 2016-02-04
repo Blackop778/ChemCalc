@@ -1,7 +1,9 @@
 package Blackop778.ChemCalc.Elements;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
+import Blackop778.ChemCalc.Functions.IOManager;
 import Blackop778.ChemCalc.Functions.InputReturn;
 
 public abstract class ElementDatabase
@@ -10,6 +12,7 @@ public abstract class ElementDatabase
 	private static Element[] atomicNumberArray = new Element[119];
 	private static HashMap<String, Element> atomicSymbolMap = new HashMap<String, Element>();
 	private static HashMap<String, Element> atomicNameMap = new HashMap<String, Element>();
+	private static HashMap<Double, Element> atomicMassMap = new HashMap<Double, Element>();
 
 	/**
 	 * Fills the various maps and array with Elements
@@ -62,6 +65,7 @@ public abstract class ElementDatabase
 			atomicNumberArray[i] = storage;
 			atomicSymbolMap.put(storage.getAtomicSymbol(), storage);
 			atomicNameMap.put(storage.getName(), storage);
+			atomicMassMap.put(storage.getAtomicMass(), storage);
 		}
 	}
 
@@ -155,6 +159,21 @@ public abstract class ElementDatabase
 			throw new NoElementException("An element with a name of '" + name + "' could not be found.");
 	}
 
+	public static Element atomicMassGet(double mass) throws NoElementException
+	{
+		if(!initialized)
+		{
+			initialize();
+		}
+
+		Element toReturn = atomicMassMap.get(mass);
+
+		if(toReturn != null)
+			return toReturn;
+		else
+			throw new NoElementException("An element with a mass of '" + mass + "' could not be found.");
+	}
+
 	public static InputReturn massUnknownInputGet(String input) throws NoElementException
 	{
 		Element element;
@@ -179,5 +198,50 @@ public abstract class ElementDatabase
 		}
 
 		return new InputReturn("mass", String.valueOf(element.getAtomicMass()), inputType);
+	}
+
+	public static InputReturn nameUnknownInputGet(String input) throws NoElementException
+	{
+		Element element;
+		String inputType;
+		try
+		{
+			double number = Double.valueOf(input);
+			if(number % 1 == 0 && number > 119)
+			{
+				// 98 Could be Californium or Technetium
+				if(number == 98)
+				{
+					Scanner dispute = IOManager.getInput("Is '98' an atomic mass or atomic number? ");
+					if(dispute.next().equalsIgnoreCase("mass"))
+					{
+						element = ElementDatabase.atomicMassGet(number);
+						inputType = "mass";
+					}
+					else
+					{
+						element = ElementDatabase.atomicNumberGet((int) (number));
+						inputType = "number";
+					}
+				}
+				else
+				{
+					element = ElementDatabase.atomicNumberGet((int) (number));
+					inputType = "number";
+				}
+			}
+			else
+			{
+				element = ElementDatabase.atomicMassGet(number);
+				inputType = "mass";
+			}
+		}
+		catch(NumberFormatException e)
+		{
+			element = ElementDatabase.atomicSymbolGet(input);
+			inputType = "symbol";
+		}
+
+		return new InputReturn("name", element.getName(), inputType);
 	}
 }

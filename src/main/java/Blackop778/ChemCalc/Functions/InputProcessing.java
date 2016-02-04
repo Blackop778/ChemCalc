@@ -23,6 +23,8 @@ public abstract class InputProcessing
 			return getMass(input);
 		else if(command.equalsIgnoreCase("mole"))
 			return getMole(input);
+		else if(command.equalsIgnoreCase("name"))
+			return getName(input);
 		else if(command.equalsIgnoreCase("help"))
 			return new InputReturn("help", "Commands:"
 					+ "\nNOTE: arg stands for argument, or words typed after the initial command which modify the command."
@@ -58,5 +60,20 @@ public abstract class InputProcessing
 		else
 			return new InputReturn("blah", "Polyatomics not currently supported.");
 		// TODO Add polyatomic support
+	}
+
+	public static InputReturn getName(Scanner input) throws NoElementException
+	{
+		String[] inputArray = Libs.scannerToArray(input);
+		if(inputArray.length == 1)
+		{
+			InputReturn temp = ElementDatabase.nameUnknownInputGet(inputArray[0]);
+
+			return new InputReturn(temp.getReturnType(), temp.getOutput(), inputArray, temp.getInputType());
+		}
+		else if(inputArray.length > 1)
+			return new InputReturn("blah", "Polyatomics not currently supported.");
+		else
+			return new InputReturn("error", "Additional arguments expected.");
 	}
 }
