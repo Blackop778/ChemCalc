@@ -72,6 +72,46 @@ public abstract class IOManager
 				output = input.getOutput();
 			}
 		}
+		else if(input.getReturnType().equals("name"))
+		{
+			if(input.getInputType().equals("symbol"))
+			{
+				output = input.getInputs()[0] + " stands for " + input.getOutput();
+			}
+			else if(input.getReturnType().equals("number"))
+			{
+				output = "The element with an atomic number of " + input.getInputs()[0] + " is " + input.getOutput();
+			}
+			else if(input.getReturnType().equals("mass"))
+			{
+				output = "The element with an atomic mass of " + input.getInputs()[0] + " is " + input.getOutput();
+			}
+			else
+			{
+				output = input.getOutput();
+			}
+		}
+		else if(input.getReturnType().equals("symbol"))
+		{
+			if(input.getInputType().equals("name"))
+			{
+				output = input.getInputs()[0] + "'s symbol is " + input.getOutput();
+			}
+			else if(input.getReturnType().equals("number"))
+			{
+				output = "The element with an atomic number of " + input.getInputs()[0] + "'s symbol is "
+						+ input.getOutput();
+			}
+			else if(input.getReturnType().equals("mass"))
+			{
+				output = "The element with an atomic mass of " + input.getInputs()[0] + "'s symbol is "
+						+ input.getOutput();
+			}
+			else
+			{
+				output = input.getOutput();
+			}
+		}
 		else
 		{
 			output = input.getOutput();
