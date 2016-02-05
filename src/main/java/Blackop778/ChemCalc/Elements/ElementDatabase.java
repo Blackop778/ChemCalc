@@ -207,12 +207,12 @@ public abstract class ElementDatabase
 		try
 		{
 			double number = Double.valueOf(input);
-			if(number % 1 == 0 && number > 119)
+			if(number % 1 == 0 && number < 119)
 			{
 				// 98 Could be Californium or Technetium
 				if(number == 98)
 				{
-					Scanner dispute = IOManager.getInput("Is '98' an atomic mass or atomic number? ");
+					Scanner dispute = IOManager.getInput("Is '98' a mass or a number? ");
 					if(dispute.next().equalsIgnoreCase("mass"))
 					{
 						element = ElementDatabase.atomicMassGet(number);
