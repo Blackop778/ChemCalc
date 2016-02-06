@@ -6,7 +6,7 @@ public final class Element
 	private final String name;
 	private final String atomicSymbol;
 	private final double atomicMass;
-	private final byte charge;
+	private final byte[] charges;
 
 	/**
 	 * Creates a new Element and stores it's data
@@ -22,13 +22,13 @@ public final class Element
 	 * @param charge
 	 *            The Element's charge, where 127 represents it has no charge
 	 */
-	protected Element(int atomicNumber, String name, String atomicSymbol, double atomicMass, byte charge)
+	protected Element(int atomicNumber, String name, String atomicSymbol, double atomicMass, byte[] charges)
 	{
 		this.atomicNumber = atomicNumber;
 		this.name = name;
 		this.atomicSymbol = atomicSymbol;
 		this.atomicMass = atomicMass;
-		this.charge = charge;
+		this.charges = charges;
 	}
 
 	/**
@@ -71,11 +71,8 @@ public final class Element
 	 * 
 	 * @return The Element's charge, or null if it is unknown
 	 */
-	public Byte getCharge()
+	public byte[] getCharges()
 	{
-		if(charge == 127)
-			return new Byte(null);
-		else
-			return charge;
+		return charges;
 	}
 }
