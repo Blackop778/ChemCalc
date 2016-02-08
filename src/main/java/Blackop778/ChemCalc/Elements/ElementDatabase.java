@@ -1,10 +1,10 @@
-package blackop778.chemcalc.elements;
+package Blackop778.ChemCalc.Elements;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-import blackop778.chemcalc.functions.IOManager;
-import blackop778.chemcalc.functions.InputReturn;
+import Blackop778.ChemCalc.Functions.IOManager;
+import Blackop778.ChemCalc.Functions.InputReturn;
 
 public abstract class ElementDatabase
 {

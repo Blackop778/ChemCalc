@@ -1,4 +1,4 @@
-package blackop778.chemcalc.functions;
+package Blackop778.ChemCalc.Functions;
 
 public final class InputReturn
 {
