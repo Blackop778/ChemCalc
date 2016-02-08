@@ -294,4 +294,62 @@ public abstract class ElementDatabase
 
 		return new InputReturn("symbol", element.getAtomicSymbol(), inputType);
 	}
+
+	public static InputReturn chargeUnknownInputGet(String input) throws NoElementException
+	{
+		Element element;
+		String inputType;
+		try
+		{
+			double number = Double.valueOf(input);
+			if(number % 1 == 0 && number < 119)
+			{
+				// 98 Could be Californium or Technetium
+				if(number == 98)
+				{
+					Scanner dispute = IOManager.getInput("Is '98' a mass or a number? ");
+					if(dispute.next().equalsIgnoreCase("mass"))
+					{
+						element = ElementDatabase.atomicMassGet(number);
+						inputType = "mass";
+					}
+					else
+					{
+						element = ElementDatabase.atomicNumberGet((int) (number));
+						inputType = "number";
+					}
+				}
+				else
+				{
+					element = ElementDatabase.atomicNumberGet((int) (number));
+					inputType = "number";
+				}
+			}
+			else
+			{
+				element = ElementDatabase.atomicMassGet(number);
+				inputType = "mass";
+			}
+		}
+		catch(NumberFormatException e)
+		{
+			if(input.length() < 4 && !input.equalsIgnoreCase("Tin"))
+			{
+				element = ElementDatabase.atomicSymbolGet(input);
+				inputType = "symbol";
+			}
+			else
+			{
+				element = ElementDatabase.atomicNameGet(input);
+				inputType = "name";
+			}
+		}
+
+		String charges = "";
+		for(int i : element.getCharges())
+		{
+			charges = charges + " " + String.valueOf(element.getCharges()[i]);
+		}
+		charges = charges.substring(0, endIndex);
+	}
 }

@@ -94,4 +94,14 @@ public abstract class InputProcessing
 		else
 			return new InputReturn("error", "Additional arguments expected.");
 	}
+
+	public static InputReturn getCharges(Scanner input) throws NoElementException
+	{
+		String[] inputArray = Libs.scannerToArray(input);
+
+		if(inputArray.length == 1)
+		{
+			InputReturn temp = ElementDatabase.chargeUnknownInputGet(inputArray[0]);
+		}
+	}
 }
