@@ -1,4 +1,4 @@
-package Blackop778.ChemCalc.Functions;
+package blackop778.chemcalc.functions;
 
 import java.util.Scanner;
 

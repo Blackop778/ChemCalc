@@ -1,4 +1,4 @@
-package Blackop778.ChemCalc.Elements;
+package blackop778.chemcalc.elements;
 
 public final class Element
 {

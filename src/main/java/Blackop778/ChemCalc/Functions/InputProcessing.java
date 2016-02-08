@@ -1,9 +1,9 @@
-package Blackop778.ChemCalc.Functions;
+package blackop778.chemcalc.functions;
 
 import java.util.Scanner;
 
-import Blackop778.ChemCalc.Elements.ElementDatabase;
-import Blackop778.ChemCalc.Elements.NoElementException;
+import blackop778.chemcalc.elements.ElementDatabase;
+import blackop778.chemcalc.elements.NoElementException;
 
 public abstract class InputProcessing
 {

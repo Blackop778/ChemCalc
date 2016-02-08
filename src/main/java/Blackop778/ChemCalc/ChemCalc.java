@@ -1,11 +1,11 @@
-package Blackop778.ChemCalc;
+package blackop778.chemcalc;
 
 import java.util.Scanner;
 
-import Blackop778.ChemCalc.Elements.NoElementException;
-import Blackop778.ChemCalc.Functions.IOManager;
-import Blackop778.ChemCalc.Functions.InputProcessing;
-import Blackop778.ChemCalc.Functions.InputReturn;
+import blackop778.chemcalc.elements.NoElementException;
+import blackop778.chemcalc.functions.IOManager;
+import blackop778.chemcalc.functions.InputProcessing;
+import blackop778.chemcalc.functions.InputReturn;
 
 public class ChemCalc
 {
