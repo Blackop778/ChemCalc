@@ -43,10 +43,20 @@ public class ChemCalc
 	public static void doItAgain()
 	{
 		Scanner input = IOManager.getInput("Run again?(Y/N) ");
+		String next = input.next();
 
-		if(input.next().equalsIgnoreCase("Y"))
+		if(next.equalsIgnoreCase("Y"))
 		{
 			doIt();
+		}
+		else if(next.equalsIgnoreCase("Y"))
+		{
+			System.exit(0);
+		}
+		else
+		{
+			IOManager.outputln("Error: Either 'Y' or 'N' expected, '" + next + "' recieved.");
+			doItAgain();
 		}
 	}
 }

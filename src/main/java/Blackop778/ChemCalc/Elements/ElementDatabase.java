@@ -98,7 +98,9 @@ public abstract class ElementDatabase
 		{
 			initialize();
 		}
+
 		Element toReturn = atomicNumberArray[number - 1];
+
 		if(toReturn != null)
 			return toReturn;
 		else
@@ -120,6 +122,7 @@ public abstract class ElementDatabase
 		{
 			initialize();
 		}
+
 		// Format the input before getting the Element
 		String symbol1 = symbol.substring(0, 1);
 		symbol1 = symbol1.toUpperCase();
@@ -150,6 +153,7 @@ public abstract class ElementDatabase
 		{
 			initialize();
 		}
+
 		// Format the input before getting the Element
 		String name1 = name.substring(0, 1);
 		name1 = name1.toUpperCase();
@@ -346,10 +350,12 @@ public abstract class ElementDatabase
 		}
 
 		String charges = "";
-		for(int i : element.getCharges())
+		for(int i = 0; i < element.getCharges().length; i++)
 		{
 			charges = charges + " " + String.valueOf(element.getCharges()[i]);
 		}
-		charges = charges.substring(0, endIndex);
+		charges = charges.substring(1, charges.length());
+
+		return new InputReturn("charges", charges, inputType);
 	}
 }

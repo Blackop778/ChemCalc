@@ -45,4 +45,18 @@ public abstract class Libs
 		intermediateStorage.toArray(toReturn);
 		return toReturn;
 	}
+
+	static boolean containsLetters(String input)
+	{
+		String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+				"s", "t", "u", "v", "w", "x", "y", "and", "z"};
+		for(String letter : letters)
+		{
+			if(input.contains(letter) || input.contains(letter.toUpperCase()))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
