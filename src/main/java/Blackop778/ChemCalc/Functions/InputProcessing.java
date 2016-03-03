@@ -44,7 +44,7 @@ public abstract class InputProcessing
 		String[] inputStorage = Libs.scannerToArray(input);
 		InputReturn inputReturn;
 
-		if(inputStorage.length > 1 && Libs.containsLetters(Libs.arrayToString(inputStorage)))
+		if(inputStorage.length > 1)
 		{
 			double mass = 0;
 			int coeff = 1;
@@ -63,10 +63,13 @@ public abstract class InputProcessing
 				{
 					double temp = Double.valueOf(ElementDatabase.massUnknownInputGet(inputStorage[i]).getOutput());
 
-					if(Libs.isInt(inputStorage[i + 1]) && i + 1 != inputStorage.length)
+					if(i + 1 != inputStorage.length)
 					{
-						i++;
-						temp = temp * Double.valueOf(inputStorage[i]);
+						if(Libs.isInt(inputStorage[i + 1]))
+						{
+							i++;
+							temp = temp * Double.valueOf(inputStorage[i]);
+						}
 					}
 
 					mass += temp;

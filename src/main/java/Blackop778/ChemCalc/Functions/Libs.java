@@ -46,7 +46,7 @@ public abstract class Libs
 		return toReturn;
 	}
 
-	static boolean containsLetters(String input)
+	public static boolean containsLetters(String input)
 	{
 		boolean toReturn = false;
 		String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
@@ -74,7 +74,7 @@ public abstract class Libs
 		return output.substring(0, source.length);
 	}
 
-	static Boolean isInt(String input)
+	public static Boolean isInt(String input)
 	{
 		try
 		{

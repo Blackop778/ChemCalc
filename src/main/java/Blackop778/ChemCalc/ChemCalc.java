@@ -6,6 +6,7 @@ import Blackop778.ChemCalc.Elements.NoElementException;
 import Blackop778.ChemCalc.Functions.IOManager;
 import Blackop778.ChemCalc.Functions.InputProcessing;
 import Blackop778.ChemCalc.Functions.InputReturn;
+import Blackop778.ChemCalc.Functions.Libs;
 import Blackop778.ChemCalc.Functions.SyntaxError;
 
 public class ChemCalc
@@ -13,6 +14,7 @@ public class ChemCalc
 
 	public static void main(String[] args)
 	{
+		IOManager.output(String.valueOf(Libs.containsLetters("2 fe")));
 		doIt();
 	}
 
