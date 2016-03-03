@@ -48,15 +48,44 @@ public abstract class Libs
 
 	static boolean containsLetters(String input)
 	{
+		boolean toReturn = false;
 		String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
 				"s", "t", "u", "v", "w", "x", "y", "and", "z"};
+
 		for(String letter : letters)
 		{
 			if(input.contains(letter) || input.contains(letter.toUpperCase()))
 			{
-				return true;
+				toReturn = true;
 			}
 		}
-		return false;
+
+		return toReturn;
+	}
+
+	static String arrayToString(String[] source)
+	{
+		String output = "";
+		for(String temp : source)
+		{
+			output = output + " " + temp;
+		}
+
+		return output.substring(0, source.length);
+	}
+
+	static Boolean isInt(String input)
+	{
+		try
+		{
+			@SuppressWarnings("unused")
+			int i = Integer.valueOf(input);
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

@@ -6,6 +6,7 @@ import Blackop778.ChemCalc.Elements.NoElementException;
 import Blackop778.ChemCalc.Functions.IOManager;
 import Blackop778.ChemCalc.Functions.InputProcessing;
 import Blackop778.ChemCalc.Functions.InputReturn;
+import Blackop778.ChemCalc.Functions.SyntaxError;
 
 public class ChemCalc
 {
@@ -31,6 +32,10 @@ public class ChemCalc
 		{
 			output = new InputReturn("NoElementException", e.getLocalizedMessage());
 		}
+		catch(SyntaxError e)
+		{
+			output = new InputReturn("SyntaxError", e.getLocalizedMessage());
+		}
 
 		IOManager.finalOutput(output);
 
@@ -49,7 +54,7 @@ public class ChemCalc
 		{
 			doIt();
 		}
-		else if(next.equalsIgnoreCase("Y"))
+		else if(next.equalsIgnoreCase("N"))
 		{
 			System.exit(0);
 		}

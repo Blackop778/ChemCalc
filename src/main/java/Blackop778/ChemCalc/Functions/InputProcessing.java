@@ -14,8 +14,9 @@ public abstract class InputProcessing
 	 *            The Scanner that contains what the user input
 	 * @return An InputReturn with the processed output
 	 * @throws NoElementException
+	 * @throws SyntaxError
 	 */
-	public static InputReturn processInput(Scanner inputScanner) throws NoElementException
+	public static InputReturn processInput(Scanner inputScanner) throws NoElementException, SyntaxError
 	{
 		Scanner input = inputScanner;
 		String command = input.next();
@@ -38,14 +39,51 @@ public abstract class InputProcessing
 			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
 	}
 
-	public static InputReturn getMass(Scanner input) throws NoElementException
+	public static InputReturn getMass(Scanner input) throws NoElementException, SyntaxError
 	{
 		String[] inputStorage = Libs.scannerToArray(input);
+		InputReturn inputReturn;
 
-		InputReturn temp = ElementDatabase.massUnknownInputGet(inputStorage[0]);
+		if(inputStorage.length > 1 && Libs.containsLetters(Libs.arrayToString(inputStorage)))
+		{
+			double mass = 0;
+			int coeff = 1;
+			for(int i = 0; i < inputStorage.length; i++)
+			{
+				if(Libs.isInt(inputStorage[i]))
+				{
+					if(mass == 0)
+					{
+						coeff = Integer.valueOf(inputStorage[i]);
+					}
+					else
+						throw new SyntaxError("Consecutive integers detected in a polynomial.");
+				}
+				else
+				{
+					double temp = Double.valueOf(ElementDatabase.massUnknownInputGet(inputStorage[i]).getOutput());
 
-		InputReturn inputreturn = new InputReturn("mass", temp.getOutput(), inputStorage, temp.getInputType());
-		return inputreturn;
+					if(Libs.isInt(inputStorage[i + 1]) && i + 1 != inputStorage.length)
+					{
+						i++;
+						temp = temp * Double.valueOf(inputStorage[i]);
+					}
+
+					mass += temp;
+				}
+			}
+
+			mass = mass * coeff;
+
+			inputReturn = new InputReturn("mass", String.valueOf(mass), inputStorage, "polyatomic");
+		}
+		else
+		{
+			InputReturn temp = ElementDatabase.massUnknownInputGet(inputStorage[0]);
+			inputReturn = new InputReturn("mass", temp.getOutput(), inputStorage, temp.getInputType());
+		}
+
+		return inputReturn;
 	}
 
 	public static InputReturn getMole(Scanner input) throws NoElementException
@@ -108,9 +146,7 @@ public abstract class InputProcessing
 			return new InputReturn(temp.getReturnType(), temp.getOutput(), inputArray, temp.getInputType());
 		}
 		else
-		{
 			return new InputReturn("error", "1 and only 1 argument expected");
-		}
 
 	}
 }
