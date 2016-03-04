@@ -30,11 +30,19 @@ public abstract class InputProcessing
 			return getSymbol(input);
 		else if(command.equalsIgnoreCase("charges"))
 			return getCharges(input);
+		else if(command.equalsIgnoreCase("credits"))
+			return new InputReturn("credits",
+					"This app was developed by Blackop778, also known as Nathan F. Contact me at nefalt@att.net.");
 		else if(command.equalsIgnoreCase("help"))
-			return new InputReturn("help", "Commands:"
-					+ "\nNOTE: arg stands for argument, or words typed after the initial command which modify the command."
-					+ "\nmass  -  [atomic symbol, name, or number] returns the mass of arg 1. Will eventually allow polyatomics."
-					+ "\nmole  -  [atomic mass] [atomic symbol, name, or number] returns how many moles of arg 1 you have with a mass of arg 2.");
+			return new InputReturn("help",
+					"Commands:"
+							+ "\nNOTE: arg stands for argument, or words typed after the initial command which modify the command."
+							+ "\nmass  -  [atomic symbol, name, or number] returns the mass of arg 1. Will eventually allow polyatomics."
+							+ "\nmole  -  [atomic mass] [atomic symbol, name, or number] returns how many moles of arg 1 you have with a mass of arg 2."
+							+ "\nname  -  [atomic mass, number, or symbol] returns the name of the element that matches the input."
+							+ "\nsymbol  -  [atomic mass, number, or name] returns the symbol of the element that matches the input."
+							+ "\ncharges  -  [atomic mass, number, name, or symbol] returns the charges of the element that matches the input."
+							+ "\ncredits  -  returns information about the creator.");
 		else
 			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
 	}
