@@ -34,7 +34,7 @@ public abstract class InputProcessing
 			return new InputReturn("help", "Commands:"
 					+ "\nNOTE: arg stands for argument, or words typed after the initial command which modify the command."
 					+ "\nmass  -  [atomic symbol, name, or number] returns the mass of arg 1. Will eventually allow polyatomics."
-					+ "\nmole  -  [atomic symbol, name, or number] [atomic mass] returns how many moles of arg 1 you have with a mass of arg 2.");
+					+ "\nmole  -  [atomic mass] [atomic symbol, name, or number] returns how many moles of arg 1 you have with a mass of arg 2.");
 		else
 			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
 	}
@@ -46,18 +46,20 @@ public abstract class InputProcessing
 
 		if(inputStorage.length > 1)
 		{
+			boolean coeffSet = false;
 			double mass = 0;
 			int coeff = 1;
 			for(int i = 0; i < inputStorage.length; i++)
 			{
 				if(Libs.isInt(inputStorage[i]))
 				{
-					if(mass == 0)
+					if(!coeffSet)
 					{
 						coeff = Integer.valueOf(inputStorage[i]);
+						coeffSet = true;
 					}
 					else
-						throw new SyntaxError("Consecutive integers detected in a polynomial.");
+						throw new SyntaxError("Error: Consecutive integers detected in a polynomial.");
 				}
 				else
 				{
@@ -94,9 +96,9 @@ public abstract class InputProcessing
 		String[] inputArray = Libs.scannerToArray(input);
 		if(inputArray.length == 2)
 		{
-			InputReturn temp = ElementDatabase.massUnknownInputGet(inputArray[0]);
+			double inputMass = Double.valueOf(inputArray[0]);
+			InputReturn temp = ElementDatabase.massUnknownInputGet(inputArray[1]);
 			double elementMass = Double.valueOf(temp.getOutput());
-			double inputMass = Double.valueOf(inputArray[1]);
 			double moles = inputMass / elementMass;
 			return new InputReturn("mole", String.valueOf(moles), inputArray, temp.getInputType());
 		}
@@ -132,10 +134,8 @@ public abstract class InputProcessing
 
 			return new InputReturn(temp.getReturnType(), temp.getOutput(), inputArray, temp.getInputType());
 		}
-		else if(inputArray.length > 1)
-			return new InputReturn("blah", "Polyatomics not currently supported.");
 		else
-			return new InputReturn("error", "Additional arguments expected.");
+			return new InputReturn("error", "1 and only 1 argument expected.");
 	}
 
 	public static InputReturn getCharges(Scanner input) throws NoElementException
@@ -149,7 +149,7 @@ public abstract class InputProcessing
 			return new InputReturn(temp.getReturnType(), temp.getOutput(), inputArray, temp.getInputType());
 		}
 		else
-			return new InputReturn("error", "1 and only 1 argument expected");
+			return new InputReturn("error", "1 and only 1 argument expected.");
 
 	}
 }
