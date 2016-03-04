@@ -15,6 +15,7 @@ public abstract class InputProcessing
 	 * @return An InputReturn with the processed output
 	 * @throws NoElementException
 	 * @throws SyntaxError
+	 * @throws ProcessedError
 	 */
 	public static InputReturn processInput(Scanner inputScanner) throws NoElementException, SyntaxError
 	{
@@ -99,12 +100,24 @@ public abstract class InputProcessing
 		return inputReturn;
 	}
 
-	public static InputReturn getMole(Scanner input) throws NoElementException
+	public static InputReturn getMole(Scanner input) throws NoElementException, SyntaxError
 	{
 		String[] inputArray = Libs.scannerToArray(input);
 		if(inputArray.length == 2)
 		{
-			double inputMass = Double.valueOf(inputArray[0]);
+			double inputMass;
+			try
+			{
+				inputMass = Double.valueOf(inputArray[0]);
+			}
+			catch(NumberFormatException e)
+			{
+				Scanner errorS = new Scanner(e.getLocalizedMessage());
+				errorS.useDelimiter("\"");
+				String error = errorS.next();
+				errorS.close();
+				throw new SyntaxError("Error: expected a double, recieved '" + error + "'.");
+			}
 			InputReturn temp = ElementDatabase.massUnknownInputGet(inputArray[1]);
 			double elementMass = Double.valueOf(temp.getOutput());
 			double moles = inputMass / elementMass;
