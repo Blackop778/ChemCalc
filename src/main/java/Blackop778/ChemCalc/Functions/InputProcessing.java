@@ -31,21 +31,13 @@ public abstract class InputProcessing
 			return getSymbol(input);
 		else if(command.equalsIgnoreCase("charges"))
 			return getCharges(input);
+		else if(command.equalsIgnoreCase("help"))
+			return getHelp(input);
 		else if(command.equalsIgnoreCase("credits"))
 			return new InputReturn("credits",
 					"This app was developed by Blackop778, also known as Nathan F. Contact me at nefalt@att.net.");
-		else if(command.equalsIgnoreCase("help"))
-			return new InputReturn("help",
-					"Commands:"
-							+ "\nNOTE: arg stands for argument, or words typed after the initial command which modify the command."
-							+ "\nmass  -  [atomic symbol, name, or number] returns the mass of arg 1. Will eventually allow polyatomics."
-							+ "\nmole  -  [atomic mass] [atomic symbol, name, or number] returns how many moles of arg 1 you have with a mass of arg 2."
-							+ "\nname  -  [atomic mass, number, or symbol] returns the name of the element that matches the input."
-							+ "\nsymbol  -  [atomic mass, number, or name] returns the symbol of the element that matches the input."
-							+ "\ncharges  -  [atomic mass, number, name, or symbol] returns the charges of the element that matches the input."
-							+ "\ncredits  -  returns information about the creator.");
 		else
-			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands");
+			return new InputReturn("Error", "Not a valid command. Enter 'help' for valid commands.");
 	}
 
 	public static InputReturn getMass(Scanner input) throws NoElementException, SyntaxError
@@ -114,6 +106,7 @@ public abstract class InputProcessing
 			{
 				Scanner errorS = new Scanner(e.getLocalizedMessage());
 				errorS.useDelimiter("\"");
+				errorS.next();
 				String error = errorS.next();
 				errorS.close();
 				throw new SyntaxError("Error: expected a double, recieved '" + error + "'.");
@@ -172,5 +165,41 @@ public abstract class InputProcessing
 		else
 			return new InputReturn("error", "1 and only 1 argument expected.");
 
+	}
+
+	public static InputReturn getHelp(Scanner input)
+	{
+		if(!input.hasNext())
+			return new InputReturn("help", "Commands:"
+					+ "\nEvery argument must be seperated by spaces. For example to get the mass of 'C2H5Cl' you would type:"
+					+ "\n'mass C 2 H 5 Cl' or 'P(CO2)3' --> 'mass P C 3 O 6'"
+					+ "\nmass  -  [atomic symbol, name, or number]"
+					+ "\nmole  -  [atomic mass] [atomic symbol, name, or number]"
+					+ "\nname  -  [atomic mass, number, or symbol]" + "\nsymbol  -  [atomic mass, number, or name]"
+					+ "\ncharges  -  [atomic mass, number, name, or symbol]" + "\nhelp  -  [command name]"
+					+ "\ncredits");
+		else
+		{
+			String next = input.next();
+			if(next.equalsIgnoreCase("mass"))
+				return new InputReturn("help", "Returns the atomic mass of the element or polyatomic specified.");
+			else if(next.equalsIgnoreCase("mole"))
+				return new InputReturn("help", "Returns how many moles worth of an element or polyatomic are present.");
+			else if(next.equalsIgnoreCase("name"))
+				return new InputReturn("help", "Returns the name of the element specified.");
+			else if(next.equalsIgnoreCase("symbol"))
+				return new InputReturn("help", "Returns the atomic symbol of the element specified.");
+			else if(next.equalsIgnoreCase("charges"))
+				return new InputReturn("help", "Returns the possible charges of the element specified.");
+			else if(next.equalsIgnoreCase("help"))
+				return new InputReturn("help",
+						"Displays detailed information for the specified command, or a list of commands if none specified.");
+			else if(next.equalsIgnoreCase("credits"))
+				return new InputReturn("help",
+						"Displays information crediting the creator of this program, Blackop778.");
+			else
+				return new InputReturn("help",
+						"'" + next + "' is not a valid command. Enter 'help' for a list of valid commands.");
+		}
 	}
 }

@@ -31,7 +31,7 @@ public abstract class Libs
 	 *            The Scanner whose inputs become a String[]
 	 * @return A String[] containing the remaining inputs of scanner
 	 */
-	static String[] scannerToArray(Scanner scanner)
+	public static String[] scannerToArray(Scanner scanner)
 	{
 		ArrayList<String> intermediateStorage = new ArrayList<String>();
 
