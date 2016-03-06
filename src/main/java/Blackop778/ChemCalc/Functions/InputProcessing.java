@@ -95,7 +95,7 @@ public abstract class InputProcessing
 	public static InputReturn getMole(Scanner input) throws NoElementException, SyntaxError
 	{
 		String[] inputArray = Libs.scannerToArray(input);
-		if(inputArray.length == 2)
+		if(inputArray.length > 1)
 		{
 			double inputMass;
 			try
@@ -111,15 +111,17 @@ public abstract class InputProcessing
 				errorS.close();
 				throw new SyntaxError("Error: expected a double, recieved '" + error + "'.");
 			}
-			InputReturn temp = ElementDatabase.massUnknownInputGet(inputArray[1]);
+			String tempString = Libs.arrayToString(inputArray, 1, inputArray.length);
+			Scanner tempScanner = new Scanner(tempString);
+			InputReturn temp = getMass(tempScanner);
 			double elementMass = Double.valueOf(temp.getOutput());
 			double moles = inputMass / elementMass;
 			return new InputReturn("mole", String.valueOf(moles), inputArray, temp.getInputType());
 		}
-		else if(inputArray.length == 1)
-			return new InputReturn("error", "Additional arguments expected.");
+		else if(inputArray.length <= 1)
+			return new InputReturn("error", "Error: Additional arguments expected.");
 		else
-			return new InputReturn("blah", "Polyatomics not currently supported.");
+			return new InputReturn("wat", "It isn't possible for this to be executed :I");
 		// TODO Add polyatomic support
 	}
 

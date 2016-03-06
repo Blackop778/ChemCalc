@@ -74,6 +74,39 @@ public abstract class Libs
 		return output.substring(0, source.length);
 	}
 
+	/**
+	 * Remember arrays start at 0, not 1
+	 * 
+	 * @param source
+	 *            The array to be made into a String
+	 * @param startIndex
+	 *            Inclusive, the array point to start at
+	 * @param endIndex
+	 *            Exclusive, the array point to end before
+	 * @return
+	 * @throws SyntaxError
+	 */
+	static String arrayToString(String[] source, int startIndex, int endIndex) throws SyntaxError
+	{
+		String output = "";
+		for(int i = startIndex; i < endIndex; i++)
+		{
+			String temp;
+			try
+			{
+				temp = source[i];
+			}
+			catch(ArrayIndexOutOfBoundsException e)
+			{
+				throw new SyntaxError("Error: Tried to get an array index that doesn't exist. Report it on github.");
+			}
+			output = output + " " + temp;
+
+		}
+
+		return output.substring(0, source.length);
+	}
+
 	public static Boolean isInt(String input)
 	{
 		try
