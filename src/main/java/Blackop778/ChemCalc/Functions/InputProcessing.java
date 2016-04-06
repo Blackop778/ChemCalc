@@ -118,11 +118,8 @@ public abstract class InputProcessing
 			double moles = inputMass / elementMass;
 			return new InputReturn("mole", String.valueOf(moles), inputArray, temp.getInputType());
 		}
-		else if(inputArray.length <= 1)
-			return new InputReturn("error", "Error: Additional arguments expected.");
 		else
-			return new InputReturn("wat", "It isn't possible for this to be executed :I");
-		// TODO Add polyatomic support
+			return new InputReturn("error", "Error: Additional arguments expected.");
 	}
 
 	public static InputReturn getName(Scanner input) throws NoElementException

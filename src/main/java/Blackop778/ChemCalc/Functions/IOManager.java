@@ -59,12 +59,12 @@ public abstract class IOManager
 		{
 			if(input.getInputType().equals("symbol") || input.getInputType().equals("name"))
 			{
-				output = input.getInputs()[1] + "g of " + input.getInputs()[0] + " is equalivalent to "
+				output = input.getInputs()[0] + "g of " + input.getInputs()[1] + " is equalivalent to "
 						+ input.getOutput() + " moles.";
 			}
 			else if(input.getInputType().equals("number"))
 			{
-				output = input.getInputs()[1] + "g of the element with an atomic number of " + input.getInputs()[0]
+				output = input.getInputs()[0] + "g of the element with an atomic number of " + input.getInputs()[1]
 						+ " is equalivalent to " + input.getOutput() + " moles.";
 			}
 			else
