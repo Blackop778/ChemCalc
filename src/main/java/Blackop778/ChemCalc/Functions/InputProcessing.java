@@ -15,7 +15,6 @@ public abstract class InputProcessing
 	 * @return An InputReturn with the processed output
 	 * @throws NoElementException
 	 * @throws SyntaxError
-	 * @throws ProcessedError
 	 */
 	public static InputReturn processInput(Scanner inputScanner) throws NoElementException, SyntaxError
 	{
@@ -111,6 +110,7 @@ public abstract class InputProcessing
 				errorS.close();
 				throw new SyntaxError("Error: expected a double, recieved '" + error + "'.");
 			}
+
 			String tempString = Libs.arrayToString(inputArray, 1, inputArray.length);
 			Scanner tempScanner = new Scanner(tempString);
 			InputReturn temp = getMass(tempScanner);
@@ -132,9 +132,9 @@ public abstract class InputProcessing
 			return new InputReturn(temp.getReturnType(), temp.getOutput(), inputArray, temp.getInputType());
 		}
 		else if(inputArray.length > 1)
-			return new InputReturn("blah", "Polyatomics not currently supported.");
+			return new InputReturn("error", "Polyatomics not currently supported.");
 		else
-			return new InputReturn("error", "Additional arguments expected.");
+			return new InputReturn("error", "Error: Additional arguments expected.");
 	}
 
 	public static InputReturn getSymbol(Scanner input) throws NoElementException
@@ -147,8 +147,10 @@ public abstract class InputProcessing
 
 			return new InputReturn(temp.getReturnType(), temp.getOutput(), inputArray, temp.getInputType());
 		}
+		else if(inputArray.length > 1)
+			return new InputReturn("error", "Polyatomics not currently supported.");
 		else
-			return new InputReturn("error", "1 and only 1 argument expected.");
+			return new InputReturn("error", "Error: Additional arguments expected.");
 	}
 
 	public static InputReturn getCharges(Scanner input) throws NoElementException

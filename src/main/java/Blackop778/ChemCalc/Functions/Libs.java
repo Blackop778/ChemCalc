@@ -31,7 +31,7 @@ public abstract class Libs
 	 *            The Scanner whose inputs become a String[]
 	 * @return A String[] containing the remaining inputs of scanner
 	 */
-	public static String[] scannerToArray(Scanner scanner)
+	static String[] scannerToArray(Scanner scanner)
 	{
 		ArrayList<String> intermediateStorage = new ArrayList<String>();
 
@@ -46,7 +46,7 @@ public abstract class Libs
 		return toReturn;
 	}
 
-	public static boolean containsLetters(String input)
+	static boolean containsLetters(String input)
 	{
 		boolean toReturn = false;
 		String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
