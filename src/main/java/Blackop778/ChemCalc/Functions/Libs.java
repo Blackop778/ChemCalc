@@ -71,7 +71,7 @@ public abstract class Libs
 			output = output + " " + temp;
 		}
 
-		return output.substring(0, source.length);
+		return output.substring(0, output.length());
 	}
 
 	/**
